@@ -1,70 +1,38 @@
-# Getting Started with Create React App
+# [Pre Onboarding] LULULAB 병원예약 시스템
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## 1.구현 사항
 
-## Available Scripts
+### 필수
 
-In the project directory, you can run:
+#### 1) 병원 예약 가능 목록
 
-### `npm start`
+- 예약 가능한 목록을 확인할 수 있습니다.
+- 병원의 예약 가능 일시를 확인할 수 있습니다.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+#### 2) 예약 등록
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+- 예약자, 이름, 예약 시간, 예약 종류 (진료, 검진, … 등) 의 데이터를 활용하여 병원 진료를 예약합니다.
+- 중복 예약은 불가합니다.
 
-### `npm test`
+#### 3) 전체 예약 목록
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- 예약 번호 또는 예약자로 예약 목록 조회가 가능해야 합니다.
 
-### `npm run build`
+#### 4) 예약 변경
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- 신청한 예약 번호를 통해 예약을 변경할 수 있습니다. (환자 이름, 예약 시간, 예약 종류 변경 가능)
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### 선택
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+#### 1) 예약 등록에 관한 선택 구현 사항
 
-### `npm run eject`
+- 예약을 하면 안내 메일 또는 알림이 가능하도록 구현해주세요. (가산점)
+- 노쇼한 예약자에 한해서 예약이 불가하도록 구현해주세요. (가산점)
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+## 2. 언어
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+- javascript
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+## 3. 프레임워크
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+- React js
