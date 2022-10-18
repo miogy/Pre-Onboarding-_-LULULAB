@@ -1,10 +1,12 @@
 import styled from "styled-components";
 import { AiOutlineSearch } from "react-icons/ai";
-import AppointmentList from "./AppointmentList";
 import { useState } from "react";
 
 //filter
-function DropDown() {
+function DropDown({ toggleSort }) {
+  if (!toggleSort) {
+    return null;
+  }
   return (
     <StyledDropDown>
       <li>예약자명</li>
@@ -15,11 +17,14 @@ function DropDown() {
   );
 }
 
-function Search() {
-  const [dropdown, setDropdown] = useState(false);
-  const dropdownHandler = () => {
-    setDropdown(!dropdown);
+function Search({ tab }) {
+  const [toggleSort, setToggleSort] = useState(false);
+  const toggleHandler = () => {
+    if (tab === 1) {
+      setToggleSort(!toggleSort);
+    }
   };
+
   return (
     <SearchWrap>
       <h4>예약확인</h4>
@@ -32,11 +37,10 @@ function Search() {
           type="submit"
           value="정렬하기"
           className="sortBtn"
-          onClick={dropdownHandler}
+          onClick={toggleHandler}
         />
-        {dropdown ? <DropDown /> : null}
+        {toggleSort ? <DropDown toggleSort={toggleSort} /> : null}
       </div>
-      <AppointmentList />
     </SearchWrap>
   );
 }
@@ -85,9 +89,9 @@ const StyledDropDown = styled.div`
   padding: 10px 33px 10px 34px;
   top: 55px;
   right: 0;
-  background-color: rgba(255, 255, 255, 0.2);
-  //border: 1px solid pink;
-  //box-shadow: 1px 2px 5px pink;
+  background-color: #fff;
+  border: 1px solid pink;
+  box-shadow: 1px 2px 5px rgba(218, 0, 92, 0.2);
   list-style: none;
   text-decoration: none;
   li {

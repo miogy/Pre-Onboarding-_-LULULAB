@@ -1,20 +1,38 @@
-import AddAppointment from "./AddAppointment";
+import AppointmentList from "./CheckList/AppointmentList";
+import Search from "./CheckList/Search";
+import NumberList from "./CheckList/NumberList";
+import { useCallback, useEffect, useState } from "react";
+
 import styled from "styled-components";
-
 import { BsCalendarCheck } from "react-icons/bs";
-import { useState } from "react";
 
-function Modal({ setAppointmentModal }) {
+function CheckList({ setCheck }) {
   const [tab, setTab] = useState(0);
+  const [appointmentList, setAppointmentList] = useState([]);
+
+  //list
+  const fetchData = useCallback(() => {
+    fetch("/data/appointmentList.json")
+      .then((res) => res.json())
+      .then((userList) => {
+        setAppointmentList(userList);
+      });
+  }, []);
+
+  useEffect(() => {
+    fetchData();
+  }, [fetchData]);
 
   const closeModal = () => {
-    setAppointmentModal(false);
+    setCheck(false);
   };
+
   return (
-    <Wrap>
+    <CheckListWrap>
       <div className="modal">
         <h3>
-          <BsCalendarCheck className="modalIcon" /> 예약 시스템
+          <BsCalendarCheck className="modalIcon" />
+          예약 확인
         </h3>
         <ul className="categoryTab">
           <li
@@ -23,7 +41,7 @@ function Modal({ setAppointmentModal }) {
               setTab(0);
             }}
           >
-            진료예약
+            번호검색
           </li>
           <li
             className={tab === 1 ? "active" : ""}
@@ -31,11 +49,35 @@ function Modal({ setAppointmentModal }) {
               setTab(1);
             }}
           >
-            검진예약
+            전체검색
           </li>
         </ul>
-        {tab === 0 ? <AddAppointment tab={tab} /> : null}
-        {tab === 1 ? <AddAppointment tab={tab} /> : null}
+
+        <Search tab={tab} />
+        <div className="listContainer">
+          <ul>
+            {appointmentList.map((appointment) => {
+              return (
+                <li>
+                  {tab === 0 ? <NumberList appointment={appointment} /> : null}
+                  {tab === 1 ? (
+                    <AppointmentList
+                      appointment={appointment}
+                      deleteAppointment={(appointmentId) =>
+                        setAppointmentList(
+                          appointmentList.filter(
+                            (appointment) => appointment.id !== appointmentId
+                          )
+                        )
+                      }
+                    />
+                  ) : null}
+                </li>
+              );
+            })}
+          </ul>
+        </div>
+
         <input
           type="submit"
           value="닫기"
@@ -43,12 +85,11 @@ function Modal({ setAppointmentModal }) {
           className="modalCloseBtn"
         />
       </div>
-    </Wrap>
+    </CheckListWrap>
   );
 }
-export default Modal;
-
-const Wrap = styled.div`
+export default CheckList;
+const CheckListWrap = styled.div`
   position: absolute;
   top: 0;
   left: 0;
@@ -102,6 +143,7 @@ const Wrap = styled.div`
       margin-right: 10px;
       margin-left: 20px;
     }
+
     .modalCloseBtn {
       position: absolute;
       bottom: 30px;
@@ -110,6 +152,23 @@ const Wrap = styled.div`
       width: 100px;
       height: 30px;
       text-align: center;
+    }
+    .listContainer {
+      width: 84%;
+      height: 260px;
+      margin: 0 auto;
+      overflow: scroll;
+      border: 1px solid lightgray;
+      border-radius: 5px;
+      ul {
+        width: 80%;
+        li {
+          width: 100%;
+          list-style: none;
+          text-decoration: none;
+          border-bottom: 1px solid lightgray;
+        }
+      }
     }
   }
 `;
