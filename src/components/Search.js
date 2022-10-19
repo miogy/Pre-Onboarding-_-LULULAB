@@ -1,41 +1,36 @@
-import AddAppointment from "./AddAppointment";
-import styled from "styled-components";
-
-import { BsCalendarCheck } from "react-icons/bs";
 import { useState } from "react";
 
-function Modal({ setAppointmentModal }) {
+import styled from "styled-components";
+import { BsCalendarCheck } from "react-icons/bs";
+import Category from "./Search/Category";
+import SearchAppointment from "./Search/SearchAppointment";
+import CancleAppointment from "./Search/CancleAppointment";
+
+function Search({ setCheck, appointmentList, setAppointmentList }) {
   const [tab, setTab] = useState(0);
 
   const closeModal = () => {
-    setAppointmentModal(false);
+    setCheck(false);
   };
+
   return (
-    <Wrap>
+    <CheckListWrap>
       <div className="modal">
         <h3>
-          <BsCalendarCheck className="modalIcon" /> 예약 시스템
+          <BsCalendarCheck className="modalIcon" />
+          예약 확인
         </h3>
-        <ul className="categoryTab">
-          <li
-            className={tab === 0 ? "active" : ""}
-            onClick={() => {
-              setTab(0);
-            }}
-          >
-            진료예약
-          </li>
-          <li
-            className={tab === 1 ? "active" : ""}
-            onClick={() => {
-              setTab(1);
-            }}
-          >
-            검진예약
-          </li>
-        </ul>
-        {tab === 0 ? <AddAppointment tab={tab} /> : null}
-        {tab === 1 ? <AddAppointment tab={tab} /> : null}
+        <Category tab={tab} setTab={setTab} />
+        {tab === 0 ? (
+          <SearchAppointment appointmentList={appointmentList} />
+        ) : null}
+        {tab === 1 ? (
+          <CancleAppointment
+            appointmentList={appointmentList}
+            setAppointmentList={setAppointmentList}
+          />
+        ) : null}
+
         <input
           type="submit"
           value="닫기"
@@ -43,12 +38,11 @@ function Modal({ setAppointmentModal }) {
           className="modalCloseBtn"
         />
       </div>
-    </Wrap>
+    </CheckListWrap>
   );
 }
-export default Modal;
-
-const Wrap = styled.div`
+export default Search;
+const CheckListWrap = styled.div`
   position: absolute;
   top: 0;
   left: 0;
@@ -102,6 +96,7 @@ const Wrap = styled.div`
       margin-right: 10px;
       margin-left: 20px;
     }
+
     .modalCloseBtn {
       position: absolute;
       bottom: 30px;
@@ -110,6 +105,14 @@ const Wrap = styled.div`
       width: 100px;
       height: 30px;
       text-align: center;
+      border: 1px solid #da005c;
+      border-radius: 5px;
+      background-color: rgba(0, 0, 0, 0);
+      color: #666;
+      &:hover {
+        background-color: #da005c;
+        color: #fff;
+      }
     }
   }
 `;
